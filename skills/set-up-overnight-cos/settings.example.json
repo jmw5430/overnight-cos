@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "operator": { "firstName": "Robin", "timezone": "America/New_York" },
+  "focus": "my work at the studio",
+  "notion": {
+    "cosLog": "collection://00000000-0000-0000-0000-000000000001",
+    "tasks": "collection://00000000-0000-0000-0000-000000000002",
+    "briefsParent": "00000000000000000000000000000003",
+    "rulesPage": "00000000000000000000000000000004"
+  },
+  "gmail": { "account": "you@example.com", "skipSenders": ["newsletters", "receipts", "calendar notifications"] },
+  "slack": { "enabled": false, "userId": "", "skipChannels": [] },
+  "calendars": ["primary"],
+  "keyPeople": [{ "name": "Dana Okafor", "why": "runs the studio; anything from Dana is worth a reply" }],
+  "neverFlag": ["vendor marketing emails"],
+  "schedule": { "sweep": "21:00", "drafts": "04:00" }
+}

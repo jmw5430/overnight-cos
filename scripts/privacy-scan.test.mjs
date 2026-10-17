@@ -17,6 +17,8 @@ test("generic layer catches real-looking contact details and ids", () => {
 });
 
 test("placeholders the docs use are allowed", () => {
+  assert.deepEqual(kinds("page " + "0".repeat(31) + "3"), []);
+  assert.deepEqual(kinds("page " + "0".repeat(30) + "13"), ["notion-id"], "only a single trailing digit counts as a placeholder");
   assert.deepEqual(kinds(`you${at}example.com and /Us` + "ers/you"), []);
   assert.deepEqual(kinds("Your Notion CoS Log id goes in settings."), []);
 });

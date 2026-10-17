@@ -20,11 +20,14 @@ const HERE = dirname(fileURLToPath(import.meta.url));
 const SKIP_DIRS = new Set([".git", "node_modules"]);
 const TEXT = /\.(md|mjs|js|cjs|ts|json|jsonl|txt|sh|yml|yaml|html|css|py)$|^[^.]+$/;
 
+// Placeholder ids in examples are zeros with at most a final digit; nothing real looks like that.
+const placeholderId = (m) => /^[0-]+[0-9]?$/.test(m);
+
 export const GENERIC = [
   { name: "email", re: /[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)+/g, allow: (m) => /@(example\.(com|org|net)|users\.noreply\.github\.com)$/i.test(m) },
   { name: "phone", re: /(?:\+?1[\s.-]?)?\(?\b[2-9]\d{2}\)?[\s.-]\d{3}[\s.-]\d{4}\b|\+\d{10,14}\b/g },
-  { name: "uuid", re: /\b[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\b/gi },
-  { name: "notion-id", re: /\b[0-9a-f]{32}\b/g },
+  { name: "uuid", re: /\b[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\b/gi, allow: (m) => placeholderId(m) },
+  { name: "notion-id", re: /\b[0-9a-f]{32}\b/g, allow: (m) => placeholderId(m) },
   { name: "slack-id", re: /\b[UCDGW]0[0-9A-Z]{7,10}\b/g },
   { name: "tailnet", re: /\b[\w-]+\.tail[0-9a-f]{4,}\.ts\.net\b/gi },
   { name: "home-path", re: /\/Users\/[A-Za-z0-9._-]+|\/home\/[A-Za-z0-9._-]+/g, allow: (m) => /\/(Users|home)\/(you|me|operator|example)$/.test(m) },
