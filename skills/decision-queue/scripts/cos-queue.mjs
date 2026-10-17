@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // The decision queue's door to the Next Steps Queue. Never touches Notion.
 //
-//   cos-queue.mjs raise <rows.json> [--backlog-count N --backlog-before YYYY-MM-DD]
+//   cos-queue.mjs raise <rows.json> [--operator <first name>] [--backlog-count N --backlog-before YYYY-MM-DD]
 //   cos-queue.mjs pending            answered cards and the Notion write each needs (JSON)
 //   cos-queue.mjs applied <card id> [--note "..."]
 //
@@ -41,7 +41,7 @@ async function main([cmd, ...args]) {
     }
     // Most actionable first; raise() itself refuses past the queue's 15-card ceiling.
     for (const row of pickRows(rows, rows.length)) {
-      const r = J.raise(rowToCard(row), opts);
+      const r = J.raise(rowToCard(row, { operator: flag(args, "--operator") || "You" }), opts);
       if (r.raised) out.raised.push({ key: `cos:${row.id}`, id: r.card.id });
       else out.skipped.push({ key: `cos:${row.id}`, why: r.why });
     }

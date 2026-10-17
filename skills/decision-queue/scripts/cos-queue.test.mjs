@@ -29,11 +29,11 @@ test("raise, answer, pending, applied: the full round trip", async () => {
   const file = join(root, "rows.json");
   writeFileSync(file, JSON.stringify(rows));
 
-  const first = run(root, "raise", file, "--backlog-count", "263", "--backlog-before", "2026-03-09");
+  const first = run(root, "raise", file, "--operator", "Robin", "--backlog-count", "40", "--backlog-before", "2026-03-09");
   assert.equal(first.raised.length, 3); // backlog + draft + task, never the ledger row
   assert.equal(first.open, 3);
 
-  const again = run(root, "raise", file, "--backlog-count", "263", "--backlog-before", "2026-03-09");
+  const again = run(root, "raise", file, "--backlog-count", "40", "--backlog-before", "2026-03-09");
   assert.equal(again.raised.length, 0, "a row never gets two cards");
 
   const J = await import(pathToFileURL(LIB).href);
