@@ -1,0 +1,18 @@
+{
+  "_comment": "The catalog `ship` refreshes. Add this marketplace FROM THE REMOTE (claude plugin marketplace add <owner>/overnight-cos) once the remote exists: adding it from a local clone makes this same manifest resolve to that folder, and every update then returns 'already up to date' forever, which is correct and reaches nobody. Set `owner.name` to the person or organization who owns this plugin.",
+  "name": "overnight-cos",
+  "owner": {
+    "name": "Overnight CoS"
+  },
+  "description": "An overnight chief of staff: a nightly sweep of your mail, Slack, Notion and calendars, replies drafted in your voice by morning, and one-tap decisions on your phone that teach it what matters. Never sends anything.",
+  "plugins": [
+    {
+      "name": "overnight-cos",
+      "source": "./",
+      "description": "An overnight chief of staff: a nightly sweep of your mail, Slack, Notion and calendars, replies drafted in your voice by morning, and one-tap decisions on your phone that teach it what matters. Never sends anything.",
+      "skills": [
+        "./skills/"
+      ]
+    }
+  ]
+}

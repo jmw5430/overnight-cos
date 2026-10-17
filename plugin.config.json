@@ -1,0 +1,8 @@
+{
+  "_comment": "Where the checkouts this plugin runs against live, per machine. A configured path is tried FIRST and the repo NAME second, because the folder a clone lands in varies per person and the repo it came from does not. That fallback is why a plugin works on a second person's machine. Never write a literal home path here and never write a phone number or email: a repo keeps them forever and discloses them to everyone who ever had access. Contact resolution goes through the operator's own relationships directory.",
+  "_workspace_is_a_guess": "Each operator's Supersuit workspace is wherever they run the skills from; nothing in this plugin resolves a path from here. set-up-overnight-cos writes their settings to setup/overnight-cos.json in that workspace.",
+  "workspace": ".",
+  "repos": {},
+  "people": [],
+  "frontDoor": "overnight-cos"
+}
