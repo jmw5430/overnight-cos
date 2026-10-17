@@ -24,7 +24,7 @@ An overnight chief of staff for your Supersuit.
 ## Install
 
 ```bash
-claude plugin marketplace add OWNER/overnight-cos
+claude plugin marketplace add jmw5430/overnight-cos
 ```
 
 ```bash

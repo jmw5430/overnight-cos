@@ -93,7 +93,11 @@ if (import.meta.url === `file://${process.argv[1]}`) {
     console.error("privacy-scan: --require-denylist set and no deny list found (PRIVACY_DENYLIST or --denylist). Refusing to call this clean.");
     process.exit(2);
   }
-  const terms = listPath && existsSync(listPath) ? loadTerms(listPath) : [];
+  // .privacy-allow: deny-list terms this package publishes on purpose (the GitHub owner in the
+  // install line), one per line. Committed, reviewed like code, and never a person's name.
+  const allowPath = resolve(HERE, "..", ".privacy-allow");
+  const allow = new Set(existsSync(allowPath) ? readFileSync(allowPath, "utf8").split("\n").map((l) => l.trim()).filter((l) => l && !l.startsWith("#")) : []);
+  const terms = (listPath && existsSync(listPath) ? loadTerms(listPath) : []).filter((t) => !allow.has(t));
   // The scanner's own patterns would match themselves; everything else is scanned, tests included.
   const self = [resolve(HERE, "privacy-scan.mjs")];
   const hits = scanDirs(dirs.length ? dirs : [resolve(HERE, "..")], { terms, self });

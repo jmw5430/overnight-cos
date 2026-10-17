@@ -1,0 +1,3 @@
+# Deny-list terms this package publishes on purpose. One per line. Never a person's name.
+# The GitHub account that hosts the plugin, because the install command has to name it.
+jmw5430
