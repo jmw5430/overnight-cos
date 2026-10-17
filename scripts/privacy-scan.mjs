@@ -12,7 +12,7 @@
 //      it is missing, so a release can never pass on the generic layer alone.
 //
 // Exit 0 clean, 1 hits found, 2 misconfigured.
-import { readFileSync, readdirSync, statSync, existsSync } from "node:fs";
+import { realpathSync, readFileSync, readdirSync, statSync, existsSync } from "node:fs";
 import { join, relative, resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -84,7 +84,9 @@ export function scanDirs(dirs, { terms = [], self = [] } = {}) {
   return out;
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+// Compare real paths: macOS aliases /var to /private/var, and a string compare of URLs then
+// silently skips the CLI, which reads as a clean run.
+if (process.argv[1] && realpathSync(process.argv[1]) === realpathSync(fileURLToPath(import.meta.url))) {
   const args = process.argv.slice(2);
   const flag = (n) => (args.includes(n) ? args[args.indexOf(n) + 1] : null);
   const dirs = args.filter((a, i) => !a.startsWith("--") && !["--denylist"].includes(args[i - 1]));

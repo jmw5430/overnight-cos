@@ -1,6 +1,6 @@
 {
   "name": "overnight-cos",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "An overnight chief of staff: a nightly sweep of your mail, Slack, Notion and calendars, replies drafted in your voice by morning, and one-tap decisions on your phone that teach it what matters. Never sends anything.",
   "skills": ["./skills/"]
 }

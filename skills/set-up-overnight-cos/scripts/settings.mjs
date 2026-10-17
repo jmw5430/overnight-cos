@@ -5,8 +5,9 @@
 //   settings.mjs path              where the file lives for the workspace you are in
 //   settings.mjs check [file]      exit 0 when it is complete, 1 with each problem listed
 //   settings.mjs get <dotted.key>  print one value (for a scheduled job's prompt)
-import { readFileSync, existsSync } from "node:fs";
+import { realpathSync, readFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
+import { fileURLToPath } from "node:url";
 
 export const settingsPath = (root = process.cwd()) => join(root, "setup", "overnight-cos.json");
 
@@ -41,7 +42,9 @@ export function load(root = process.cwd()) {
   return JSON.parse(readFileSync(p, "utf8"));
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+// Compare real paths: macOS aliases /var to /private/var, and a string compare of URLs then
+// silently skips the CLI, which reads as a clean run.
+if (process.argv[1] && realpathSync(process.argv[1]) === realpathSync(fileURLToPath(import.meta.url))) {
   const [cmd, arg] = process.argv.slice(2);
   if (cmd === "path") { console.log(settingsPath()); process.exit(0); }
   if (cmd === "check") {
